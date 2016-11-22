@@ -1,16 +1,3 @@
-var TaskStatus;
-(function (TaskStatus) {
-    TaskStatus[TaskStatus["UNACCEPTABLE"] = 0] = "UNACCEPTABLE";
-    TaskStatus[TaskStatus["ACCEPTABLE"] = 1] = "ACCEPTABLE";
-    TaskStatus[TaskStatus["DURING"] = 2] = "DURING";
-    TaskStatus[TaskStatus["CANSUBMIT"] = 3] = "CANSUBMIT";
-    TaskStatus[TaskStatus["SUBMITTED"] = 4] = "SUBMITTED";
-})(TaskStatus || (TaskStatus = {}));
-var ErrorCode;
-(function (ErrorCode) {
-    ErrorCode[ErrorCode["SUCCESS"] = 0] = "SUCCESS";
-    ErrorCode[ErrorCode["MISSING_TASK"] = 1] = "MISSING_TASK";
-})(ErrorCode || (ErrorCode = {}));
 var TaskService = (function () {
     function TaskService() {
         this.taskList = [];
@@ -41,29 +28,14 @@ var TaskService = (function () {
     p.addObserver = function (observer) {
         this.observerList.push(observer);
     };
-    //完成任务时调用
-    p.finish = function (id) {
-        if (id == "") {
-            return ErrorCode.MISSING_TASK;
-        }
-        for (var i = 0; i < this.taskList.length; i++) {
-            if (this.taskList[i].getId() == id) {
-                this.taskList[i].setStatus(TaskStatus.SUBMITTED);
-                this.notify(this.taskList[i]);
-                break;
-            }
-        }
-        return ErrorCode.SUCCESS;
+    p.removeObserver = function (observer) {
+        //排序
+        //.....
+        this.observerList.pop;
     };
-    //接受任务时调用
-    p.accept = function (id) {
-        for (var i = 0; i < this.taskList.length; i++) {
-            if (this.taskList[i].getId() == id && this.taskList[i].getStatus() == TaskStatus.ACCEPTABLE) {
-                this.taskList[i].setStatus(TaskStatus.DURING);
-                this.notify(this.taskList[i]);
-                break;
-            }
-        }
+    //public removeObserver(observer : Observer){}
+    p.removeTask = function (task) {
+        this.taskList.pop;
     };
     //将任务发送给所有观察者,并让观察者进行相应的处理
     //只能内部调用
@@ -75,5 +47,5 @@ var TaskService = (function () {
     TaskService.count = 0;
     return TaskService;
 }());
-egret.registerClass(TaskService,'TaskService');
+egret.registerClass(TaskService,'TaskService',["EventEmitter"]);
 //# sourceMappingURL=TaskServer.js.map

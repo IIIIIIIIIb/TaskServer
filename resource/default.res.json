@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "bg_jpg,egret_icon_png,description_json,npc2_png,npc1_png",
+			"keys": "bg_jpg,egret_icon_png,description_json,NPC_jpg",
 			"name": "preload"
 		}
 	],
@@ -22,14 +22,9 @@
 			"url": "config/description.json"
 		},
 		{
-			"name": "npc2_png",
+			"name": "NPC_jpg",
 			"type": "image",
-			"url": "assets/npc2.png"
-		},
-		{
-			"name": "npc1_png",
-			"type": "image",
-			"url": "assets/npc1.png"
+			"url": "assets/NPC.jpg"
 		}
 	]
 }
